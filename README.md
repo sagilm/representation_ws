@@ -31,4 +31,4 @@ Complete la tabla:
 ## Entrega
 
 * Subir el código al repositorio de la materia antes del 14/10/18 a las 24h.
-* Presentar el trabajo en la clase del 17/10/18 o 18/10/18.
+* Presentar el trabajo en ~la clase del 17/10/18 o 18/10/18~ una clase presencial por definir.
