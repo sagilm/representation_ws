@@ -26,7 +26,7 @@ Complete la tabla:
 
 | Integrante | github nick |
 |------------|-------------|
-|            |             |
+| Sergio Gil | sagilm      |
 
 ## Entrega
 
