@@ -30,7 +30,7 @@ Scene scene;
 //flock bounding box
 int flockWidth = 1280;
 int flockHeight = 720;
-int flockDepth = 600;
+int flockDepth = 700;
 boolean avoidWalls,flagrep,flagren= true;
 int flagcur=0;
 Interpolator inter;
@@ -200,9 +200,11 @@ void keyPressed() {
   case 'q':
     flagrep= !flagrep;
     System.out.println("flagrep: "+ flagrep);
+    
   case 'w':
    flagren= !flagren;
    System.out.println("flagren: "+ flagren);
+   
   case 'e':
     if(flagcur==0){
       flagcur=1;   

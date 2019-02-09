@@ -83,26 +83,17 @@ FV(ArrayList<Vertex> vertexList_, ArrayList<Face> faceList_){
     }
   }
   PShape Retenido(){
-  //  PShape shape= createShape();
-  //  shape.beginShape(TRIANGLE);
-  //   for(int i =0; i<faceList.size();i++){
-  //    Face act= faceList.get(i);
-  //    vertex(act.v1.x(), act.v1.y(), act.v1.z());
-  //    vertex(act.v2.x(), act.v2.y(), act.v2.z());
-  //    vertex(act.v3.x(), act.v3.y(), act.v3.z());
-  //  }
-  // shape.endShape();
-  //return shape; 
-      PShape shapeFace = createShape();
-    shapeFace.beginShape();  
-    for(Face cadj: faceList){ //recorre la lista de vertices que tiene una cara 
-      vertex(cadj.v1.x(), cadj.v1.y(), cadj.v1.z());
-      vertex(cadj.v2.x(), cadj.v2.y(), cadj.v2.z());
-      vertex(cadj.v3.x(), cadj.v3.y(), cadj.v3.z());
-      
+    PShape shape= createShape();
+    shape.beginShape(TRIANGLE);
+     for(int i =0; i<faceList.size();i++){
+      Face act= faceList.get(i);
+      vertex(act.v1.x(), act.v1.y(), act.v1.z());
+      vertex(act.v2.x(), act.v2.y(), act.v2.z());
+      vertex(act.v3.x(), act.v3.y(), act.v3.z());
     }
-    shapeFace.endShape();
-return shapeFace;
+   shape.endShape();
+  return shape; 
+
   }
   
 

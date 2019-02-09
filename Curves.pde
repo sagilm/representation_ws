@@ -17,7 +17,6 @@ public class TipoCurva{
 public class Hermite extends TipoCurva{
   public void calcular(){
     Vector lin,act=null;
-    int num= puntos.size();
     for(int i=1;i<puntos.size()-2;i++){
       Vector p0 = puntos.get(i);
       Vector p1 = puntos.get(i+1);
@@ -56,9 +55,7 @@ public class Bezier3 extends TipoCurva{
       line(act.x(),act.y(),act.z(),calctot.x(),calctot.y(),calctot.z());
       act=calctot;   
       }
-      //line(act.x(),act.y(),act.z(),p1.x(),p1.y(),p1.z());
-      //line(act.x(),act.y(),act.z(),p2.x(),p2.y(),p2.z());
-      //line(act.x(),act.y(),act.z(),p3.x(),p3.y(),p3.z());
+     
     }
     
   }
