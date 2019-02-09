@@ -28,6 +28,13 @@ Complete la tabla:
 |------------|-------------|
 | Sergio Gil | sagilm      |
 
+comandos añadidos:
+| tecla      | accion                                |
+|------------|---------------------------------------|
+| q          | cambia representacion                 |
+| w          | cambia renderizado                    |
+| e          | cambia curva(hermite bezier3,bezier7) |
+
 ## Entrega
 
 * Subir el código al repositorio de la materia antes del 3/2/19 a las 24h.
