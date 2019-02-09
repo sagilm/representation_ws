@@ -32,14 +32,15 @@ int flockWidth = 1280;
 int flockHeight = 720;
 int flockDepth = 600;
 boolean avoidWalls,flagrep,flagren= true;
-boolean flagcur=true;
+int flagcur=0;
 Interpolator inter;
 int initBoidNum = 300; // amount of boids to start the program with
 ArrayList<Boid> flock;
 Frame avatar;
 boolean animate = true;
-Bezier3 calcBez;
+Bezier3 calcBez3;
 Hermite calcHer;
+Bezier7 calcBez7;
 
 void setup() {
   size(1000, 800, P3D);
@@ -59,8 +60,9 @@ void setup() {
       Pscene.setPosition(flock.get(j).position);
       inter.addKeyFrame(Pscene);
     }
-    calcBez=new Bezier3();
-    calcHer = new Hermite();    
+    calcBez7=new Bezier7();
+    calcHer = new Hermite(); 
+    calcBez3=new Bezier3();
     
   }
 
@@ -76,12 +78,15 @@ void draw() {
   for(Frame frame : inter.keyFrames()){
       posiciones.add(frame.position());
   }
-  if(flagcur){
+  if(flagcur==0){
     calcHer.setPoints(posiciones);
     calcHer.calcular();
-  }else{
-    calcBez.setPoints(posiciones);
-    calcBez.calcular();
+  }else if(flagcur==1){
+    calcBez3.setPoints(posiciones);
+    calcBez3.calcular();
+   }else{
+    calcBez7.setPoints(posiciones);
+    calcBez7.calcular();
    }
 }
 
@@ -199,8 +204,15 @@ void keyPressed() {
    flagren= !flagren;
    System.out.println("flagren: "+ flagren);
   case 'e':
-    flagcur=!flagcur;
-    System.out.println("flagcur: "+ flagcur);
+    if(flagcur==0){
+      flagcur=1;   
+      System.out.println("flagcur: "+ flagcur);};
+    if(flagcur==1){
+      flagcur=2;   
+      System.out.println("flagcur: "+ flagcur);}; 
+    if(flagcur==2){
+      flagcur=0;   
+      System.out.println("flagcur: "+ flagcur);};      
   case ' ':
     if (scene.eye().reference() != null)
       resetEye();
