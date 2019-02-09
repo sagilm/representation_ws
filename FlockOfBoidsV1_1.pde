@@ -31,12 +31,15 @@ Scene scene;
 int flockWidth = 1280;
 int flockHeight = 720;
 int flockDepth = 600;
-boolean avoidWalls,flagrep,flagren = true;
+boolean avoidWalls,flagrep,flagren= true;
+boolean flagcur=true;
 Interpolator inter;
 int initBoidNum = 900; // amount of boids to start the program with
 ArrayList<Boid> flock;
 Frame avatar;
 boolean animate = true;
+Bezier3 calcBez;
+Hermite calcHer;
 
 void setup() {
   size(1000, 800, P3D);
@@ -51,6 +54,14 @@ void setup() {
   for (int i = 0; i < initBoidNum; i++)
     flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2),flagren,flagrep));
     inter= new Interpolator(scene,new Frame());
+    for(int j=0; j< flock.size();j++){
+      Frame Pscene = new Frame(scene);
+      Pscene.setPosition(flock.get(j).position);
+      inter.addKeyFrame(Pscene);
+    }
+    calcBez=new Bezier3();
+    calcHer = new Hermite();    
+    
   }
 
 void draw() {
@@ -61,6 +72,14 @@ void draw() {
   scene.traverse();
   // uncomment to asynchronously update boid avatar. See mouseClicked()
   // updateAvatar(scene.trackedFrame("mouseClicked"));
+ ArrayList<Vector> posiciones= new ArrayList<Vector>();
+  for(Frame frame : inter.keyFrames()){
+      posiciones.add(frame.position());
+  }
+  if(flagcur){
+    calcHer.setPoints(posiciones);
+    calcHer.calcular();
+  }
 }
 
 void walls() {
@@ -176,7 +195,9 @@ void keyPressed() {
   case 'w':
    flagren= !flagren;
    System.out.println("flagren: "+ flagren);
-  
+  case 'e':
+    flagcur=!flagcur;
+    System.out.println("flagcur: "+ flagcur);
   case ' ':
     if (scene.eye().reference() != null)
       resetEye();
