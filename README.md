@@ -29,7 +29,9 @@ Complete la tabla:
 | Sergio Gil | sagilm      |
 
 comandos añadidos:
-| tecla      | accion                                |
+
+
+| Tecla      | Accion                                |
 |------------|---------------------------------------|
 | q          | cambia representacion                 |
 | w          | cambia renderizado                    |
