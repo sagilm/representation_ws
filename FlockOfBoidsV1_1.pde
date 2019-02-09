@@ -34,7 +34,7 @@ int flockDepth = 600;
 boolean avoidWalls,flagrep,flagren= true;
 boolean flagcur=true;
 Interpolator inter;
-int initBoidNum = 900; // amount of boids to start the program with
+int initBoidNum = 300; // amount of boids to start the program with
 ArrayList<Boid> flock;
 Frame avatar;
 boolean animate = true;
@@ -79,7 +79,10 @@ void draw() {
   if(flagcur){
     calcHer.setPoints(posiciones);
     calcHer.calcular();
-  }
+  }else{
+    calcBez.setPoints(posiciones);
+    calcBez.calcular();
+   }
 }
 
 void walls() {

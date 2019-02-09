@@ -33,9 +33,34 @@ public class Hermite extends TipoCurva{
         line(act.x(),act.y(),act.z(),lin.x(),lin.y(),lin.z());
         act=lin;
       }
-      line(act.x(),act.y(),act.z(),p1.x(),p1.y(),p1.z());
+    //  line(act.x(),act.y(),act.z(),p1.x(),p1.y(),p1.z());
   }
  }
 
 }
-public class Bezier3 extends TipoCurva{}
+public class Bezier3 extends TipoCurva{
+  public void calcular(){
+    Vector calctot,act=null;
+    int num= puntos.size();
+    for(int i=1;i<puntos.size()-4;i=i+4){
+      Vector p0 = puntos.get(i);
+      Vector p1 = puntos.get(i+1);
+      Vector p2 = puntos.get(i+2);
+      Vector p3 = puntos.get(i+3);
+      act=p0;
+      for(float t=0; t<=1; t=t+0.01){
+      float rel= 1-t;
+      Vector calc1 = Vector.add(Vector.multiply(p0,(pow(rel,3))),Vector.multiply(p1,(3*t*pow(rel,2))));
+      Vector calc2 = Vector.add(Vector.multiply(p2,(3*rel*pow(t,2))),Vector.multiply(p3,pow(t,3)));
+       calctot= Vector.add(calc1,calc2);
+      line(act.x(),act.y(),act.z(),calctot.x(),calctot.y(),calctot.z());
+      act=calctot;   
+      }
+      //line(act.x(),act.y(),act.z(),p1.x(),p1.y(),p1.z());
+      //line(act.x(),act.y(),act.z(),p2.x(),p2.y(),p2.z());
+      //line(act.x(),act.y(),act.z(),p3.x(),p3.y(),p3.z());
+    }
+    
+  }
+
+}
