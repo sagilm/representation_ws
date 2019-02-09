@@ -50,16 +50,14 @@ ArrayList<Vertex> vertexList;
   }
 PShape Retenido(){
     PShape shape = createShape();
-    shape.beginShape(TRIANGLE);
+    shape.beginShape(TRIANGLE_STRIP);
     for(int i =0;i<vertexList.size();i++){
       Vertex act= vertexList.get(i);
       for(int j=0;j<act.adjacent.size();j++){
         Vertex vadj=vertexList.get(act.adjacent.get(j));
         shape.vertex(act.vertex.x(), act.vertex.y(),act.vertex.z());
         shape.vertex(vadj.vertex.x(), vadj.vertex.y(), vadj.vertex.z());
-      }
-      
-    
+      }    
     }
     shape.endShape();
   return shape;
@@ -73,10 +71,7 @@ FV(ArrayList<Vertex> vertexList_, ArrayList<Face> faceList_){
     this.vertexList=vertexList_;
     this.faceList=faceList_;
   }
-FV(ArrayList<Vertex> vertexList_){
-    this.vertexList=vertexList_;
-    ArrayList<Face> faceList= new ArrayList<Face>();  
-  }
+  
   void Inmediato(){
     for(int i =0; i<faceList.size();i++){
       Face act= faceList.get(i);
@@ -84,31 +79,33 @@ FV(ArrayList<Vertex> vertexList_){
       vertex(act.v1.x(), act.v1.y(), act.v1.z());
       vertex(act.v2.x(), act.v2.y(), act.v2.z());
       vertex(act.v3.x(), act.v3.y(), act.v3.z());
+      endShape();
     }
   }
   PShape Retenido(){
-    PShape shape= createShape();
-    shape.beginShape();
-     for(int i =0; i<faceList.size();i++){
-      Face act= faceList.get(i);
-      beginShape(TRIANGLE);
-      vertex(act.v1.x(), act.v1.y(), act.v1.z());
-      vertex(act.v2.x(), act.v2.y(), act.v2.z());
-      vertex(act.v3.x(), act.v3.y(), act.v3.z());
+  //  PShape shape= createShape();
+  //  shape.beginShape(TRIANGLE);
+  //   for(int i =0; i<faceList.size();i++){
+  //    Face act= faceList.get(i);
+  //    vertex(act.v1.x(), act.v1.y(), act.v1.z());
+  //    vertex(act.v2.x(), act.v2.y(), act.v2.z());
+  //    vertex(act.v3.x(), act.v3.y(), act.v3.z());
+  //  }
+  // shape.endShape();
+  //return shape; 
+      PShape shapeFace = createShape();
+    shapeFace.beginShape();  
+    for(Face cadj: faceList){ //recorre la lista de vertices que tiene una cara 
+      vertex(cadj.v1.x(), cadj.v1.y(), cadj.v1.z());
+      vertex(cadj.v2.x(), cadj.v2.y(), cadj.v2.z());
+      vertex(cadj.v3.x(), cadj.v3.y(), cadj.v3.z());
+      
     }
-   shape.endShape();
-  return shape; 
+    shapeFace.endShape();
+return shapeFace;
   }
   
-  FV render(){
-    //ArrayList<Vertex> vertexList= Vertex.lista();
-    faceList.add(new Face(vertexList.get(1).vertex,vertexList.get(2).vertex,vertexList.get(3).vertex));
-    faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(2).vertex,vertexList.get(3).vertex));
-    faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(1).vertex,vertexList.get(3).vertex));
-    faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(1).vertex,vertexList.get(2).vertex));
-    return new FV(vertexList, faceList);  
 
-  }
 }
 
   

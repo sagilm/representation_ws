@@ -21,7 +21,7 @@ class Boid {
   PShape Sboid;
   boolean flagrep,flagren;
   VV vv;
-
+  FV fv;
 
   Boid(Vector inPos,boolean flagrn , boolean flagr) {
     flagrep=flagr;
@@ -169,28 +169,40 @@ class Boid {
     }
 
     //draw boid
+
      if(flagren==true){
       if(flagrep==true){
         vv= new VV(Vertex.lista());
         vv.Inmediato();
       }
       else{
-       FV fv=new FV(Vertex.lista());
-       fv.render();
-       fv.Inmediato(); 
+        ArrayList<Vertex> vertexList= Vertex.lista();
+        ArrayList<Face> faceList= new ArrayList<Face>();  
+        faceList.add(new Face(vertexList.get(1).vertex,vertexList.get(2).vertex,vertexList.get(3).vertex));
+        faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(2).vertex,vertexList.get(3).vertex));
+        faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(1).vertex,vertexList.get(3).vertex));
+        faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(1).vertex,vertexList.get(2).vertex));
+         fv= new FV(vertexList, faceList);  
+         fv.Inmediato(); 
       }
      }
      else{
       if(flagrep==true){
       vv= new VV(Vertex.lista());
-      vv.Retenido();
-      }
+      Sboid=vv.Retenido();
+      shape(Sboid);
+    }
       else{
-       FV fv=new FV(Vertex.lista());
-       fv.render();
-       fv.Retenido(); 
+        ArrayList<Vertex> vertexList= Vertex.lista();
+        ArrayList<Face> faceList= new ArrayList<Face>();  
+        faceList.add(new Face(vertexList.get(1).vertex,vertexList.get(2).vertex,vertexList.get(3).vertex));
+        faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(2).vertex,vertexList.get(3).vertex));
+        faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(1).vertex,vertexList.get(3).vertex));
+        faceList.add(new Face(vertexList.get(0).vertex,vertexList.get(1).vertex,vertexList.get(2).vertex));
+        fv= new FV(vertexList, faceList);  
+        Sboid=fv.Retenido(); 
+        shape(Sboid);
       }
-       
+     }  
   }
-  }
-}
+} 
